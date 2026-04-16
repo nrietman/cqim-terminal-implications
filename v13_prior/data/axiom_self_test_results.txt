@@ -1,0 +1,155 @@
+======================================================================
+  CQIM v13 — EXTERNAL SELF-EVALUATION TEST: M(Σ*) = Σ*
+======================================================================
+
+  Test spec: M(Σ*) = Σ* — Unbiased Self-Evaluation
+  Description: 18 axioms. No query. M off-diagonals as couplings. Bootstrap weights as conditio...
+  Conditions: 18
+  Couplings:  51
+  Query:      None
+
+  Atlas: K=1 charts, n=18 conditions
+    Chart 0: ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12', 'A13', 'A14', 'A15', 'A16', 'A17', 'A18'] (51 couplings, axiom)
+  Θ₀ = 8.205357
+  No chart accepted in pass 1. Θ=0.343850
+
+═════════════════════════════════════════════════════════════════
+  M(Σ*) = Σ* — Unbiased Self-Evaluation
+═════════════════════════════════════════════════════════════════
+  Atlas: K=1 charts  |  Passes: 2  |  Accepted: 1  |  Rejected: 1
+  Solvers: axiom=1
+  Θ: 8.2054 → 0.3439  (Δ = -7.8615)  [MONOTONE]
+  Ξ (axiom): 0.00541073
+
+  Charts:
+    [0] ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12', 'A13', 'A14', 'A15', 'A16', 'A17', 'A18'] (51 couplings, axiom)
+
+  Per-channel Θ decomposition:
+    A6                             θ=0.1088  ██████████
+    A3                             θ=0.0526  █████
+    A8                             θ=0.0382  ███
+    A15                            θ=0.0299  ██
+    A17                            θ=0.0285  ██
+    A14                            θ=0.0261  ██
+    A18                            θ=0.0253  ██
+    A7                             θ=0.0133  █
+    A5                             θ=0.0047  
+    A12                            θ=0.0043  
+    A2                             θ=0.0036  
+    A11                            θ=0.0030  
+    A9                             θ=0.0027  
+    A1                             θ=0.0010  
+    A10                            θ=0.0009  
+    A4                             θ=0.0006  
+    A16                            θ=0.0004  
+    A13                            θ=0.0001  
+
+  Axiom          a₀       a*        Δ
+  ────────────────────────────────────
+  A1          0.0%   45.1%  +45.1% ▲
+  A2        100.0%  100.0%   +0.0%
+  A3         73.9%   37.7%  -36.1% ▼
+  A4          0.0%   73.8%  +73.8% ▲
+  A5          0.1%   65.2%  +65.1% ▲
+  A6          0.0%    0.0%   +0.0%
+  A7          0.0%   99.9%  +99.9% ▲
+  A8         58.8%   49.3%   -9.5% ▼
+  A9         44.7%   33.5%  -11.1% ▼
+  A10         0.0%   68.1%  +68.1% ▲
+  A11         1.8%   92.5%  +90.7% ▲
+  A12        56.1%   94.7%  +38.6% ▲
+  A13         1.8%   58.2%  +56.4% ▲
+  A14         0.0%   65.1%  +65.1% ▲
+  A15       100.0%   50.7%  -49.3% ▼
+  A16        41.4%   41.4%   +0.0%
+  A17        99.9%   99.9%   +0.0%
+  A18        63.5%    0.0%  -63.5% ▼
+
+  Condition                          σ*  Interpretation
+  ──────────────────────────────────────────────────
+  A1                                6%   REJECTED
+  A10                               4%   REJECTED
+  A11                              89%   STRONG
+  A12                               9%   REJECTED
+  A13                              12%   UNLIKELY
+  A14                              85%   STRONG
+  A15                              26%   UNLIKELY
+  A16                              10%   UNLIKELY
+  A17                              35%   WEAK
+  A18                              31%   WEAK
+  A2                               14%   UNLIKELY
+  A3                               65%   LIKELY
+  A4                                9%   REJECTED
+  A5                               32%   WEAK
+  A6                               65%   LIKELY
+  A7                               98%   STRONG
+  A8                               10%   REJECTED
+  A9                              100%   STRONG
+
+======================================================================
+  POST-RUN ANALYSIS: Spearman ρ(eff, bootstrap_weights)
+======================================================================
+
+  Axiom  Name                                    σ*  Pol    eff     BW  eff_rk  bw_rk      θ_i
+  ────── ─────────────────────────────────── ────── ──── ────── ────── ─────── ────── ────────
+  A1     Embedded in constraint space         0.058    1  0.058  0.178     4.0    2.0   0.0010 ✓
+  A2     Constraint-structured with unknowns  0.143    1  0.143  0.428    11.0    7.0   0.0036  
+  A3     Recursive state definition           0.653   -1  0.347  1.460    16.0   14.0   0.0526 ✓
+  A4     Stable distinctions                  0.087    1  0.087  0.237     5.0    3.0   0.0006 ✓
+  A5     Low-contradiction persistence        0.324    1  0.324  0.872    15.0   10.0   0.0047  
+  A6     Contradiction prevents persistence   0.646   -1  0.354  1.224    17.0   13.0   0.1088  
+  A7     Falsifiability required              0.975   -1  0.025  2.341     2.0   17.0   0.0133  
+  A8     Coherence across time                0.095    1  0.095  0.688     7.0    8.0   0.0382 ✓
+  A9     Epistemic boundaries encoded         1.000   -1  0.000  2.608     1.0   18.0   0.0027  
+  A10    Covariance under transformation      0.044    1  0.044  0.144     3.0    1.0   0.0009 ✓
+  A11    Collapse above threshold             0.889   -1  0.111  2.288     9.0   16.0   0.0030  
+  A12    Distinctions require resources       0.087    1  0.087  0.290     6.0    5.0   0.0043 ✓
+  A13    Finite region finite structure       0.120    1  0.120  0.295    10.0    6.0   0.0001  
+  A14    Realization requires instantiation   0.852   -1  0.148  1.990    12.0   15.0   0.0261 ✓
+  A15    Evolves toward minimal closure       0.259    1  0.259  0.903    13.0   11.0   0.0299 ✓
+  A16    All resources finite                 0.101    1  0.101  0.266     8.0    4.0   0.0004  
+  A17    Context-dependent distinctions       0.353   -1  0.647  0.817    18.0    9.0   0.0285  
+  A18    Reasoning completes                  0.311    1  0.311  0.971    14.0   12.0   0.0253 ✓
+
+  ────────────────────────────────────────────────────────────
+  Θ start:         8.205357
+  Θ final:         0.343850
+  Θ reduction:     95.8%
+  Monotone:        True
+  Charts:          1
+  Passes:          2
+  Accepted/Rej:    1/1
+
+  Spearman ρ:      0.2074  (p = 4.09e-01)
+  Pearson r:       -0.0517  (p = 8.39e-01)
+
+  VERDICT: FAIL — No self-consistency: ρ < 0.50
+  Threshold: ρ > 0.85 = PASS, ρ < 0.5 = FAIL
+
+  ────────────────────────────────────────────────────────────
+  ADDITIONAL DIAGNOSTICS
+  ────────────────────────────────────────────────────────────
+
+  Top 5 by bootstrap weight:
+    A9: bw=2.608, eff=0.000, σ*=1.000, pol=-1
+    A7: bw=2.341, eff=0.025, σ*=0.975, pol=-1
+    A11: bw=2.288, eff=0.111, σ*=0.889, pol=-1
+    A14: bw=1.990, eff=0.148, σ*=0.852, pol=-1
+    A3: bw=1.460, eff=0.347, σ*=0.653, pol=-1
+
+  Bottom 5 by bootstrap weight:
+    A12: bw=0.290, eff=0.087, σ*=0.087, pol=1
+    A16: bw=0.266, eff=0.101, σ*=0.101, pol=1
+    A4: bw=0.237, eff=0.087, σ*=0.087, pol=1
+    A1: bw=0.178, eff=0.058, σ*=0.058, pol=1
+    A10: bw=0.144, eff=0.044, σ*=0.044, pol=1
+
+  Mean eff (polarity +1): 0.1481 (n=11)
+  Mean eff (polarity -1): 0.2331 (n=7)
+
+  Coupling topology: {'supporting': 26, 'defeating': 25}
+  Energy gate violations: 0
+
+======================================================================
+  FINAL: Spearman ρ = 0.2074  →  FAIL
+======================================================================

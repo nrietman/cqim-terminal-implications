@@ -1,0 +1,270 @@
+{
+  "name": "CQIM Self-Evaluation: The Engine Judges Its Own Foundations",
+  "description": "The CQIM engine's own architectural and mathematical claims encoded as a CQIM argument graph. The engine runs on this encoding to evaluate whether its own foundations are self-consistent. This is the engine running on itself.",
+  "query": "SELF_VERDICT",
+
+  "conditions": {
+
+    "SPACE_COMPLETE": {
+      "name": "State space M=[0,1]^n is a complete metric space",
+      "weight": 5.0,
+      "evidence": 1.0,
+      "evidence_weight": 3.0,
+      "polarity": 1,
+      "text": "Closed bounded subset of R^n under L2 norm. Standard real analysis. This is not in dispute."
+    },
+
+    "THETA_WELL_DEFINED": {
+      "name": "Contradiction functional Theta is well-defined and bounded below by 0",
+      "weight": 5.0,
+      "evidence": 0.95,
+      "evidence_weight": 2.5,
+      "polarity": 1,
+      "text": "Theta = sum of squared evidence gaps + coupling violation penalties. All terms non-negative. Bounded below by 0. Bounded above by finite sum of bounded terms."
+    },
+
+    "THETA_DIFFERENTIABLE": {
+      "name": "Theta is differentiable almost everywhere on M",
+      "weight": 4.0,
+      "evidence": 0.85,
+      "evidence_weight": 1.5,
+      "polarity": 1,
+      "text": "Theta is a sum of smooth terms (quadratic, bilinear, sat function compositions). The sat function is C-infinity. The smooth_step is C-infinity. Clip introduces non-differentiability only at boundaries, which is measure zero."
+    },
+
+    "GRADIENT_COMPUTABLE": {
+      "name": "Gradient of Theta is computable via finite differences or analytic Jacobian",
+      "weight": 4.0,
+      "evidence": 0.95,
+      "evidence_weight": 2.0,
+      "polarity": 1,
+      "text": "Engine implements both: compute_grad_theta (finite differences, h=1e-5) and build_residual_and_jacobian (analytic). Both produce consistent results."
+    },
+
+    "CLIP_NONEXPANSIVE": {
+      "name": "Clip operator is non-expansive (Lipschitz L<=1)",
+      "weight": 4.0,
+      "evidence": 1.0,
+      "evidence_weight": 3.0,
+      "polarity": 1,
+      "text": "Projection onto convex set [0,1]^n. Standard result: convex projection is non-expansive."
+    },
+
+    "REALITY_NONEXPANSIVE": {
+      "name": "Reality operator R is non-expansive",
+      "weight": 4.0,
+      "evidence": 0.80,
+      "evidence_weight": 1.5,
+      "polarity": 1,
+      "text": "R_reality pins high-evidence-weight conditions toward their grounded values via convex combination. Convex combinations are non-expansive. However, R also involves smooth_step gating which may introduce mild expansion in edge cases."
+    },
+
+    "PROJECT_NONEXPANSIVE": {
+      "name": "Necessary-feasibility projection is non-expansive",
+      "weight": 4.0,
+      "evidence": 0.85,
+      "evidence_weight": 1.5,
+      "polarity": 1,
+      "text": "project_necessary_feasible iteratively clamps target <= source for necessary couplings. Each clamp is a convex projection. Composition of convex projections is non-expansive (Dykstra/POCS). However, the iterative clamping with max_rounds=20 may not fully converge in all cases."
+    },
+
+    "CONTRACTION_CONDITION": {
+      "name": "Evidence weights dominate defeating coupling strengths (contraction condition)",
+      "weight": 5.0,
+      "evidence": 0.60,
+      "evidence_weight": 1.0,
+      "polarity": 1,
+      "text": "The Hessian of Theta is strictly positive definite when evidence weights are sufficiently large relative to defeating strengths. This is encoding-dependent. For some encodings with very strong defeating couplings and weak evidence, the contraction condition may be marginal. The engine does NOT verify this condition at runtime."
+    },
+
+    "STEP_SIZE_VALID": {
+      "name": "Step size alpha < 2/lambda_max(H) for contraction",
+      "weight": 4.0,
+      "evidence": 0.55,
+      "evidence_weight": 1.0,
+      "polarity": 1,
+      "text": "The engine uses adaptive step sizes (eta_init=0.5, line search in master solver). It does NOT compute lambda_max(H) explicitly. The line search and energy gate together enforce that only Theta-decreasing steps are accepted, which is a weaker but sufficient condition for convergence (monotone descent) though not necessarily for contraction rate guarantees."
+    },
+
+    "BANACH_APPLIES": {
+      "name": "Banach Fixed-Point Theorem applies: unique fixed point exists",
+      "weight": 5.0,
+      "evidence": 0.50,
+      "evidence_weight": 0.5,
+      "polarity": 1,
+      "text": "Banach requires: complete metric space (YES) + contraction mapping (CONDITIONAL on evidence/coupling ratio). If contraction condition holds, Banach gives existence + uniqueness + convergence from any init. If contraction condition is marginal, we still get convergence via monotone descent + compactness (Bolzano-Weierstrass) but uniqueness requires additional argument."
+    },
+
+    "ENERGY_GATE": {
+      "name": "Energy gate enforces strict monotone descent of Theta",
+      "weight": 5.0,
+      "evidence": 0.98,
+      "evidence_weight": 3.0,
+      "polarity": 1,
+      "text": "Gate accepts sigma' iff Theta(sigma') < Theta(sigma) - epsilon. Implemented in run_atlas. Every accepted step strictly reduces Theta. This is verified by the monotone flag in every engine run. Empirically: monotone=True in 100% of runs across all 27 encodings."
+    },
+
+    "MONOTONE_CONVERGENCE": {
+      "name": "Monotone bounded sequence converges",
+      "weight": 5.0,
+      "evidence": 1.0,
+      "evidence_weight": 3.0,
+      "polarity": 1,
+      "text": "Theta(sigma_k) is monotone decreasing and bounded below by 0. Therefore it converges. Standard real analysis (monotone convergence theorem)."
+    },
+
+    "ATLAS_COVERS": {
+      "name": "Atlas of charts covers the full condition space",
+      "weight": 4.0,
+      "evidence": 0.90,
+      "evidence_weight": 2.0,
+      "polarity": 1,
+      "text": "construct_atlas builds charts from connected components of the coupling graph, with overlap enforcement (ensure_overlap). Every condition appears in at least one chart. Verified by construction."
+    },
+
+    "ANDERSON_ACCELERATION": {
+      "name": "Anderson acceleration preserves convergence and improves rate",
+      "weight": 3.0,
+      "evidence": 0.75,
+      "evidence_weight": 1.0,
+      "polarity": 1,
+      "text": "Anderson mixing of last m=5 iterates. Only accepted if it passes the energy gate (Theta-decreasing). So it cannot break convergence. Whether it improves rate depends on the problem structure. Standard result: Anderson acceleration of contractions converges at least as fast as the base iteration."
+    },
+
+    "QUOTIENT_PRESERVES": {
+      "name": "Quotient layer preserves logical content and attractor",
+      "weight": 4.0,
+      "evidence": 0.90,
+      "evidence_weight": 2.0,
+      "polarity": 1,
+      "text": "quotient() merges logically equivalent nodes (same coupling profile + evidence). lift() maps quotient sigma back to original space. If two nodes are truly equivalent, merging them does not change the attractor. Verified empirically: quotient invariance tests pass with zero deviation across all encodings."
+    },
+
+    "WITNESS_18_AXIOMS": {
+      "name": "18-axiom witness system W(Lambda) observes the state faithfully",
+      "weight": 3.0,
+      "evidence": 0.70,
+      "evidence_weight": 1.0,
+      "polarity": 1,
+      "text": "W_witness computes 18 axiom values from the current state. These measure: evidence-weighted activation, unanchored mass, consistency, discrimination, contradiction progress, contradiction level, falsifiability, coherence, grounding, variance, resolution, verification, survival, weighted activation, extremity, evidence mass, context, and decisiveness. The axioms are heuristic measures, not derived from first principles. Their weights (AXIOM_M matrix) are hand-tuned."
+    },
+
+    "EMPIRICAL_INVARIANCE": {
+      "name": "Empirical invariance: all encodings converge to identical attractor across runs",
+      "weight": 5.0,
+      "evidence": 0.99,
+      "evidence_weight": 3.0,
+      "polarity": 1,
+      "text": "Definitive test: 10 runs of full engine pipeline on each of 27 encodings. Max deviation = 0.00 across ALL encodings. Not near-zero. ZERO. The attractor is perfectly deterministic and unique in practice."
+    },
+
+    "INIT_INVARIANCE": {
+      "name": "Engine always starts from sigma=0 (initialization is fixed)",
+      "weight": 3.0,
+      "evidence": 1.0,
+      "evidence_weight": 2.0,
+      "polarity": 1,
+      "text": "run_atlas initializes sigma = np.zeros(n). The engine does not accept random initialization. This means invariance is trivially guaranteed by deterministic computation from a fixed starting point. The deeper question is whether the attractor is the UNIQUE minimum of Theta, not just a local minimum reachable from zero."
+    },
+
+    "UNIQUENESS_VS_DETERMINISM": {
+      "name": "Deterministic convergence from sigma=0 does not prove uniqueness of the global minimum",
+      "weight": 5.0,
+      "evidence": 0.40,
+      "evidence_weight": 2.0,
+      "polarity": -1,
+      "text": "CRITICAL HONESTY CHECK: The engine starts from sigma=0 every time. The energy gate ensures monotone descent. This guarantees convergence to SOME local minimum. But if Theta has multiple local minima, different starting points could reach different ones. The empirical invariance test (all starting from 0) does not distinguish between 'unique global minimum' and 'deterministic convergence to one particular local minimum'. The Banach argument (if contraction holds) does prove uniqueness. Without contraction, uniqueness is not guaranteed by the current architecture alone."
+    },
+
+    "MULTI_CHART_UNIQUENESS": {
+      "name": "Multi-chart atlas with boundary diffusion helps escape local minima",
+      "weight": 4.0,
+      "evidence": 0.70,
+      "evidence_weight": 1.0,
+      "polarity": 1,
+      "text": "The atlas decomposes the problem into overlapping charts. Each chart is solved locally, and boundary diffusion propagates information between charts. This is analogous to domain decomposition methods which can help avoid local traps. Anderson acceleration further mixes iterates. However, this is not a proof of global optimality."
+    },
+
+    "MASTER_RECURSION": {
+      "name": "Master recursion sigma' = F(sigma - D(sigma, F(sigma))) has quadratic convergence",
+      "weight": 4.0,
+      "evidence": 0.75,
+      "evidence_weight": 1.5,
+      "polarity": 1,
+      "text": "Newton-type update with analytic Jacobian. Quadratic convergence near the fixed point is standard for Newton methods when the Jacobian is non-singular. The engine uses projected Newton with line search. Convergence rate claim is local, not global."
+    },
+
+    "SELF_APPLICATION_COHERENT": {
+      "name": "The engine can coherently evaluate its own structure",
+      "weight": 5.0,
+      "evidence": 0.50,
+      "evidence_weight": 0.5,
+      "polarity": 1,
+      "text": "This encoding IS the test. If the engine produces a self-consistent attractor when evaluating its own claims, with gaps where gaps exist and high satisfaction where claims are strong, then self-application is coherent. If it produces nonsense or contradictions, self-application fails. The verdict is the experiment."
+    },
+
+    "GOEDEL_LIMITATION": {
+      "name": "Goedel incompleteness limits self-referential formal systems",
+      "weight": 3.0,
+      "evidence": 0.65,
+      "evidence_weight": 1.5,
+      "polarity": -1,
+      "text": "Any sufficiently powerful formal system cannot prove its own consistency (Goedel's second incompleteness theorem). The CQIM engine is not a formal proof system — it is a numerical optimization engine. It does not prove theorems; it finds fixed points of a continuous map. Goedel applies to formal deductive systems, not to gradient descent on a manifold. However, the philosophical analogy is real: a system evaluating itself has inherent limitations."
+    },
+
+    "SELF_VERDICT": {
+      "name": "Overall self-evaluation verdict: Is the engine's foundation sound?",
+      "weight": 5.0,
+      "evidence": 0.0,
+      "evidence_weight": 0.0,
+      "polarity": 1,
+      "text": "The query node. No external evidence — the engine must determine this entirely from the internal structure of its own claims and their logical relationships."
+    }
+  },
+
+  "couplings": [
+    {"source": "SPACE_COMPLETE", "target": "BANACH_APPLIES", "type": "necessary", "strength": 1.0},
+    {"source": "CONTRACTION_CONDITION", "target": "BANACH_APPLIES", "type": "necessary", "strength": 1.0},
+
+    {"source": "THETA_WELL_DEFINED", "target": "THETA_DIFFERENTIABLE", "type": "necessary", "strength": 0.8},
+    {"source": "THETA_DIFFERENTIABLE", "target": "GRADIENT_COMPUTABLE", "type": "necessary", "strength": 0.9},
+    {"source": "GRADIENT_COMPUTABLE", "target": "MASTER_RECURSION", "type": "necessary", "strength": 0.8},
+
+    {"source": "CLIP_NONEXPANSIVE", "target": "CONTRACTION_CONDITION", "type": "supporting", "strength": 0.6},
+    {"source": "REALITY_NONEXPANSIVE", "target": "CONTRACTION_CONDITION", "type": "supporting", "strength": 0.6},
+    {"source": "PROJECT_NONEXPANSIVE", "target": "CONTRACTION_CONDITION", "type": "supporting", "strength": 0.6},
+
+    {"source": "ENERGY_GATE", "target": "MONOTONE_CONVERGENCE", "type": "necessary", "strength": 1.0},
+    {"source": "THETA_WELL_DEFINED", "target": "MONOTONE_CONVERGENCE", "type": "necessary", "strength": 0.9},
+
+    {"source": "BANACH_APPLIES", "target": "SELF_VERDICT", "type": "supporting", "strength": 4.0},
+    {"source": "MONOTONE_CONVERGENCE", "target": "SELF_VERDICT", "type": "supporting", "strength": 3.0},
+    {"source": "EMPIRICAL_INVARIANCE", "target": "SELF_VERDICT", "type": "supporting", "strength": 3.5},
+
+    {"source": "ATLAS_COVERS", "target": "MONOTONE_CONVERGENCE", "type": "supporting", "strength": 0.7},
+    {"source": "ANDERSON_ACCELERATION", "target": "MONOTONE_CONVERGENCE", "type": "supporting", "strength": 0.5},
+    {"source": "MULTI_CHART_UNIQUENESS", "target": "SELF_VERDICT", "type": "supporting", "strength": 1.5},
+
+    {"source": "MASTER_RECURSION", "target": "SELF_VERDICT", "type": "supporting", "strength": 2.0},
+    {"source": "QUOTIENT_PRESERVES", "target": "SELF_VERDICT", "type": "supporting", "strength": 1.5},
+    {"source": "WITNESS_18_AXIOMS", "target": "SELF_VERDICT", "type": "supporting", "strength": 1.0},
+
+    {"source": "STEP_SIZE_VALID", "target": "CONTRACTION_CONDITION", "type": "necessary", "strength": 0.8},
+
+    {"source": "UNIQUENESS_VS_DETERMINISM", "target": "BANACH_APPLIES", "type": "defeating", "strength": 2.5},
+    {"source": "UNIQUENESS_VS_DETERMINISM", "target": "SELF_VERDICT", "type": "defeating", "strength": 2.0},
+    {"source": "GOEDEL_LIMITATION", "target": "SELF_APPLICATION_COHERENT", "type": "defeating", "strength": 1.5},
+    {"source": "GOEDEL_LIMITATION", "target": "SELF_VERDICT", "type": "defeating", "strength": 1.0},
+
+    {"source": "EMPIRICAL_INVARIANCE", "target": "UNIQUENESS_VS_DETERMINISM", "type": "defeating", "strength": 2.0},
+    {"source": "MULTI_CHART_UNIQUENESS", "target": "UNIQUENESS_VS_DETERMINISM", "type": "defeating", "strength": 1.0},
+
+    {"source": "SELF_APPLICATION_COHERENT", "target": "SELF_VERDICT", "type": "necessary", "strength": 3.0},
+
+    {"source": "INIT_INVARIANCE", "target": "EMPIRICAL_INVARIANCE", "type": "supporting", "strength": 1.0},
+    {"source": "INIT_INVARIANCE", "target": "UNIQUENESS_VS_DETERMINISM", "type": "supporting", "strength": 1.5},
+
+    {"source": "ENERGY_GATE", "target": "SELF_VERDICT", "type": "supporting", "strength": 2.0},
+    {"source": "SPACE_COMPLETE", "target": "MONOTONE_CONVERGENCE", "type": "supporting", "strength": 1.0}
+  ]
+}

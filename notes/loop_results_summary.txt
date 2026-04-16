@@ -1,0 +1,23 @@
+RECURSIVE LOOP RESULTS SUMMARY
+================================
+Ω = 32.9% (FIXED, Δ = 0.0001)
+Θ = 0.218772
+Ξ = 0.00656384
+max|Δ| = 0.00286 (near convergence)
+ρ̄ = 1.7965 (early oscillation inflates this; last 20 passes are stable)
+
+All 18 axiom conditions: FIXED
+All 5 dynamic conditions: FIXED or ~FIXED
+
+Dynamic conditions at fixed point:
+  ρ (contraction):      4.0%  — the recursion knows its contraction is weak
+  μ (monotonicity):    50.2%  — the recursion knows it's ~50% monotone
+  κ (convergence rate):  9.5% — the recursion knows convergence is slow
+  ξ_res (residual):    91.6%  — the recursion knows its residual is stable
+  φ (fixed-point):     77.2%  — the recursion knows it's near the fixed point
+
+KEY: Ω = 32.9% vs 20.0% (self-application without dynamics)
+The 13% increase comes from the dynamic conditions:
+  - ξ_res (91.6%) and φ (77.2%) strongly support Ω
+  - The recursion knowing it's stable and near the fixed point
+    adds structural justification that wasn't available before

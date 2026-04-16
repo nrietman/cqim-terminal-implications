@@ -1,0 +1,44 @@
+KEY FINDINGS FROM PRIOR WORK (v13 era)
+=======================================
+
+1. "All Axioms Are Theorems" paper (CQIM_Self_Referential_Global_Attractor.pdf)
+   - Author: Nathan Rietmann, April 2026
+   - Proves all 18 axioms derive from single foundational requirement W (self-modeling)
+   - W: a system S satisfies W iff it contains a map W: (K, Λ, F) → I_K
+   - Proves CQIM is a self-referential global attractor
+   - Unique fixed point σ* ∈ [0,1]^18 with Ξ(σ*) = 0
+   - Verified across 58 starting points including all extremal cases
+   - σ_0 = [0,...,0] (no assumptions) converges to σ* exactly
+   - Three layers: foundation (W), constructive layer (11 axioms), consequence layer (7 axioms: A3,A6,A7,A9,A13,A17)
+   - Master Theorem: all 18 statements are theorems of W, not assumptions
+
+2. v13 External Self-Evaluation Test (CQIMv13—ExternalSelf-EvaluationTestAnalysis.md)
+   - Spearman ρ = 0.2074 → FAIL by test threshold (ρ > 0.85)
+   - But failure was due to polarity inversion in test design
+   - Engine converged cleanly: Θ 8.2054 → 0.3439, 95.8% reduction, monotone
+   - Ξ = 0.00541073
+   - 18 conditions, 51 couplings, 1 chart, 2 passes
+
+3. v13 Fixed-Point Stability Test (axiom_self_test_3_results.txt)
+   - 10 perturbation trials, ±0.05 noise
+   - ALL recovered to σ* with max_dev = 0.000000
+   - PASS — σ* is a stable fixed point
+
+4. v13 Self-Evaluation with 24 conditions (self_evaluation_results(1).txt)
+   - 24 conditions (engine properties as conditions)
+   - 15 ESTABLISHED, 6 CONTESTED, 3 GAP
+   - SELF_VERDICT = 0.0000 (GAP)
+   - BANACH_APPLIES = 0.1576 (GAP)
+   - SELF_APPLICATION_COHERENT = 0.0750 (GAP)
+   - Battery of 50 runs: max deviation 0.00, invariance PASS
+   - Θ = 1.716079, monotone
+
+KEY COMPARISON POINTS FOR v14.1:
+- v13 had Ξ = 0.00541, v14.1 has Ξ = 0.00664
+- v13 SELF_VERDICT = 0.000 (couldn't self-evaluate), v14.1 Ω = 20.0% (converges)
+- v13 had 18 conditions (axioms only), v14.1 has 19 (18 axioms + Ω)
+- v13 had no bootstrap loop, v14.1 runs 100 bootstrap passes with contraction mapping
+- v13 paper proves global attractor theoretically, v14.1 demonstrates it computationally with self-application
+- v13 stability test: perturbation recovery perfect (max_dev=0.000000)
+- v13 had polarity issues in self-test design
+- v14.1 quotient layer is new — canonicalizes before engine runs

@@ -1,0 +1,41 @@
+PAPER: "The Self-Consistent Fixed Point of the CQIM Axiom System"
+M(Σ*) = Σ* — empirical demonstration
+Engine: CQIM v13, zero evidence, no query
+
+σ* from this paper (Table 1):
+A1  Embedded in constraint space      0.307  +1
+A2  Constraint-structured w/ unknowns 0.000  +1
+A3  Recursive state definition        0.751  -1
+A4  Stable distinctions               0.365  +1
+A5  Low-contradiction persistence     0.363  +1
+A6  Contradiction prevents persist.   1.000  -1
+A7  Falsifiability required           1.000  -1
+A8  Coherence across time             0.000  +1
+A9  Epistemic boundaries encoded      0.991  -1
+A10 Covariance under transformation   0.280  +1
+A11 Collapse above threshold          0.943  -1
+A12 Distinctions require resources    0.214  +1
+A13 Finite region finite structure    0.244  +1
+A14 Realization requires instantiation 1.000 -1
+A15 Evolves toward minimal closure    0.000  +1
+A16 All resources finite              0.386  +1
+A17 Context-dependent distinctions    0.632  -1
+A18 Reasoning completes               0.336  +1
+
+Θ(σ*) = 0.00205
+
+Tests:
+1. Global uniqueness: 100 random restarts, all converge to σ*, max dev 0.000000
+2. Wide basin: perturbations ±0.50 on all 18 dims, 10 trials × 8 magnitudes, all recover exactly
+3. Solver independence: 8 configurations, max dev 0.001468 (minimal config), all PASS
+4. Topology response: 5 coupling edits, all local/proportional/stable/intelligible
+5. Conclusion: M(Σ*) = Σ* holds
+
+COMPARISON WITH v14.1 SELF-APPLICATION:
+- v13 paper σ* has Θ = 0.00205 (near zero but not zero)
+- v14.1 "All Axioms Are Theorems" paper σ* has Θ = 1.0×10^-10 (machine zero), Ξ = 0
+- v14.1 self-application σ* has Θ = 0.000380, Ξ = 0.00664, Ω = 20.0%
+
+KEY DIFFERENCE: v13 papers run the engine ONCE on the self-encoding.
+v14.1 self-application runs the engine RECURSIVELY — output becomes input for next pass.
+The bootstrap loop is the new element. That's what produces Ω and the contraction mapping proof.

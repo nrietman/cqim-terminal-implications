@@ -1,0 +1,109 @@
+======================================================================
+  CQIM v13 — EXTERNAL FIXED-POINT STABILITY TEST
+  M(Σ*) = Σ* — Perturbation Recovery
+======================================================================
+
+  Test spec: M(Σ*) = Σ* — Fixed Point Stability Test
+  Conditions: 18
+  Couplings:  51
+  Protocol:   Converge → Perturb ×10 → Re-converge → Check deviation
+  Pass:       All 10 max deviations < 0.02
+  Fail:       Any max deviation > 0.10
+
+  STEP 1: Converging to σ*...
+  Atlas: K=1 charts, n=18 conditions
+    Chart 0: ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12', 'A13', 'A14', 'A15', 'A16', 'A17', 'A18'] (51 couplings, axiom)
+  Θ₀ = 8.205357
+  No chart accepted in pass 1. Θ=0.343850
+
+  σ* converged:
+  Axiom  Name                                           σ*
+  ────── ──────────────────────────────────────── ────────
+  A1     Embedded in constraint space               0.0580
+  A2     Constraint-structured with unknowns        0.1430
+  A3     Recursive state definition                 0.6532
+  A4     Stable distinctions                        0.0867
+  A5     Low-contradiction persistence              0.3242
+  A6     Contradiction prevents persistence         0.6455
+  A7     Falsifiability required                    0.9753
+  A8     Coherence across time                      0.0950
+  A9     Epistemic boundaries encoded               1.0000
+  A10    Covariance under transformation            0.0445
+  A11    Collapse above threshold                   0.8890
+  A12    Distinctions require resources             0.0873
+  A13    Finite region finite structure             0.1198
+  A14    Realization requires instantiation         0.8522
+  A15    Evolves toward minimal closure             0.2588
+  A16    All resources finite                       0.1013
+  A17    Context-dependent distinctions             0.3534
+  A18    Reasoning completes                        0.3108
+
+  Θ(σ*) = 0.343850
+  Monotone: True
+  Charts: 1, Passes: 2
+
+  STEP 2-4: Perturbation trials (10 trials, ±0.05 noise)...
+
+  Trial  1: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3848→Θ_rec=0.3439  mono=True  [✓]
+  Trial  2: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3623→Θ_rec=0.3439  mono=True  [✓]
+  Trial  3: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3795→Θ_rec=0.3439  mono=True  [✓]
+  Trial  4: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3598→Θ_rec=0.3439  mono=True  [✓]
+  Trial  5: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3621→Θ_rec=0.3439  mono=True  [✓]
+  Trial  6: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3619→Θ_rec=0.3439  mono=True  [✓]
+  Trial  7: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3525→Θ_rec=0.3439  mono=True  [✓]
+  Trial  8: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3722→Θ_rec=0.3439  mono=True  [✓]
+  Trial  9: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3484→Θ_rec=0.3439  mono=True  [✓]
+  Trial 10: max_dev=0.000000  mean_dev=0.000000  worst=A1  Θ_pert=0.3787→Θ_rec=0.3439  mono=True  [✓]
+
+  ============================================================
+  STEP 5: RESULTS
+  ============================================================
+
+  Max deviation across all trials:  0.000000
+  Mean deviation across all trials: 0.000000
+  Θ(σ*):                           0.343850
+
+  Per-trial deviations:
+    Trial  1: 0.000000 → PASS
+    Trial  2: 0.000000 → PASS
+    Trial  3: 0.000000 → PASS
+    Trial  4: 0.000000 → PASS
+    Trial  5: 0.000000 → PASS
+    Trial  6: 0.000000 → PASS
+    Trial  7: 0.000000 → PASS
+    Trial  8: 0.000000 → PASS
+    Trial  9: 0.000000 → PASS
+    Trial 10: 0.000000 → PASS
+
+  VERDICT: PASS — σ* is a stable fixed point. All perturbations recovered within 0.02.
+  Threshold: max_dev < 0.02 = PASS, max_dev > 0.10 = FAIL
+
+  ────────────────────────────────────────────────────────────
+  PER-AXIOM RECOVERY ANALYSIS (mean |σ_recovered - σ*| across 10 trials)
+  ────────────────────────────────────────────────────────────
+
+  Axiom  Name                                      σ*   Mean Dev    Max Dev
+  ────── ─────────────────────────────────── ──────── ────────── ──────────
+  A1     Embedded in constraint space          0.0580   0.000000   0.000000
+  A2     Constraint-structured with unknowns   0.1430   0.000000   0.000000
+  A3     Recursive state definition            0.6532   0.000000   0.000000
+  A4     Stable distinctions                   0.0867   0.000000   0.000000
+  A5     Low-contradiction persistence         0.3242   0.000000   0.000000
+  A6     Contradiction prevents persistence    0.6455   0.000000   0.000000
+  A7     Falsifiability required               0.9753   0.000000   0.000000
+  A8     Coherence across time                 0.0950   0.000000   0.000000
+  A9     Epistemic boundaries encoded          1.0000   0.000000   0.000000
+  A10    Covariance under transformation       0.0445   0.000000   0.000000
+  A11    Collapse above threshold              0.8890   0.000000   0.000000
+  A12    Distinctions require resources        0.0873   0.000000   0.000000
+  A13    Finite region finite structure        0.1198   0.000000   0.000000
+  A14    Realization requires instantiation    0.8522   0.000000   0.000000
+  A15    Evolves toward minimal closure        0.2588   0.000000   0.000000
+  A16    All resources finite                  0.1013   0.000000   0.000000
+  A17    Context-dependent distinctions        0.3534   0.000000   0.000000
+  A18    Reasoning completes                   0.3108   0.000000   0.000000
+
+======================================================================
+  FINAL: PASS
+  Max deviation: 0.000000  (threshold: < 0.02)
+======================================================================

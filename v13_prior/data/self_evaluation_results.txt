@@ -1,0 +1,44 @@
+CQIM SELF-EVALUATION RESULTS
+Date: 2026-04-11 02:45:02
+Encoding: cqim_self_evaluation.json
+Conditions: 24
+Theta: 1.716079
+Monotone: True
+Passes: 2
+
+ATTRACTOR:
+  SPACE_COMPLETE                            sigma=1.0000  [ESTABLISHED]
+  CLIP_NONEXPANSIVE                         sigma=1.0000  [ESTABLISHED]
+  INIT_INVARIANCE                           sigma=1.0000  [ESTABLISHED]
+  ENERGY_GATE                               sigma=0.9800  [ESTABLISHED]
+  EMPIRICAL_INVARIANCE                      sigma=0.9676  [ESTABLISHED]
+  THETA_WELL_DEFINED                        sigma=0.9460  [ESTABLISHED]
+  MONOTONE_CONVERGENCE                      sigma=0.9460  [ESTABLISHED]
+  ATLAS_COVERS                              sigma=0.9000  [ESTABLISHED]
+  QUOTIENT_PRESERVES                        sigma=0.9000  [ESTABLISHED]
+  THETA_DIFFERENTIABLE                      sigma=0.8500  [ESTABLISHED]
+  GRADIENT_COMPUTABLE                       sigma=0.8500  [ESTABLISHED]
+  PROJECT_NONEXPANSIVE                      sigma=0.8500  [ESTABLISHED]
+  REALITY_NONEXPANSIVE                      sigma=0.8000  [ESTABLISHED]
+  MASTER_RECURSION                          sigma=0.7585  [ESTABLISHED]
+  ANDERSON_ACCELERATION                     sigma=0.7491  [ESTABLISHED]
+  WITNESS_18_AXIOMS                         sigma=0.6992  [CONTESTED]
+  GOEDEL_LIMITATION                         sigma=0.6500  [CONTESTED]
+  UNIQUENESS_VS_DETERMINISM                 sigma=0.6400  [CONTESTED]
+  MULTI_CHART_UNIQUENESS                    sigma=0.6118  [CONTESTED]
+  STEP_SIZE_VALID                           sigma=0.5494  [CONTESTED]
+  CONTRACTION_CONDITION                     sigma=0.5454  [CONTESTED]
+  BANACH_APPLIES                            sigma=0.1576  [GAP]
+  SELF_APPLICATION_COHERENT                 sigma=0.0750  [GAP]
+  SELF_VERDICT                              sigma=0.0000  [GAP]
+
+ESTABLISHED: 15
+CONTESTED:   6
+GAP:         3
+
+SELF-VERDICT (SELF_VERDICT): sigma = 0.0000
+
+BATTERY (50 runs):
+  Max deviation: 0.00e+00
+  Mean deviation: 0.00e+00
+  Invariance: PASS
